@@ -9,12 +9,12 @@ const Button = ({
   ...props
 }) => {
   return (
-    <div
+    <button
       className={`px-4 py-2 rounded-lg ${className} ${bgColor} ${textColor} `}
       {...props}
     >
       {children}
-    </div>
+    </button>
   );
 };
 

@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import './App.css';
 import authService from './appwrite/auth';
 import { Footer, Header } from './components';
+import PostForm from './components/post-form/PostForm';
 import { login, logout } from './store/authSlice';
-
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -14,7 +14,6 @@ function App() {
       .getCurrentUser()
       .then((userData) => {
         if (userData) {
-          console.log(userData);
           dispatch(login({ userData }));
         } else {
           dispatch(logout());
@@ -27,7 +26,9 @@ function App() {
     <div className='min-h-screen flex flex-wrap content-between bg-gray-400'>
       <div className='w-full block'>
         <Header />
-        <main> </main>
+        <main>
+          {/* <PostForm /> */}
+        </main>
         <Footer />
       </div>
     </div>
