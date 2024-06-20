@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 import './App.css';
 import authService from './appwrite/auth';
 import { Footer, Header } from './components';
-import PostForm from './components/post-form/PostForm';
 import { login, logout } from './store/authSlice';
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,7 @@ function App() {
       <div className='w-full block'>
         <Header />
         <main>
-          {/* <PostForm /> */}
+          <Outlet />
         </main>
         <Footer />
       </div>

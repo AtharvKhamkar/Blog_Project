@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import appwriteService from '../../appwrite/config';
 import { Button, Input, RTE, Select } from '../index';
 
@@ -10,7 +10,7 @@ const PostForm = ({ post }) => {
     useForm({
       defaultValues: {
         title: post?.title || '',
-        slug: post?.slug || '',
+        slug: post?.$id || '',
         content: post?.content || '',
         status: post?.status || 'active',
       },
@@ -45,7 +45,7 @@ const PostForm = ({ post }) => {
 
       if (file) {
         const fileId = file.$id;
-        data.featuredImage = file.$id;
+        data.featuredImage = fileId;
         const dbPost = await appwriteService.createPost({
           ...data,
           userId: userData.$id,
@@ -72,7 +72,7 @@ const PostForm = ({ post }) => {
   React.useEffect(() => {
     const subscription = watch((value, { name }) => {
       if (name === 'title') {
-        setValue('slug', slugTransform(value.title, { shouldValidate: true }));
+        setValue('slug', slugTransform(value.title), { shouldValidate: true });
       }
     });
 
@@ -88,7 +88,7 @@ const PostForm = ({ post }) => {
           label='Title: '
           placeholder='Title'
           className='mb-4'
-          {...redirect('title', { required: true })}
+          {...register('title', { required: true })}
         />
         <Input
           label='Slug :'

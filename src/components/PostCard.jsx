@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import appwriteService from '../appwrite/config';
 
 const PostCard = ({ $id, title, featuredImage }) => {
+  console.log(featuredImage);
   return (
     <Link to={`/post/${$id}`}>
       <div className='w-full bg-gray-100 rounded-xl p-4'>
