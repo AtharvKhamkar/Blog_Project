@@ -23,7 +23,7 @@ const EditPost = () => {
   console.log(post);
 
   return post ? (
-    <div className='py-8'>
+    <div className='py-8 text-gray-800'>
       <Container>
         <PostForm post={post} />
       </Container>

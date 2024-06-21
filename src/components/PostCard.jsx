@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import appwriteService from '../appwrite/config';
 
 const PostCard = ({ $id, title, featuredImage }) => {
-  console.log(featuredImage);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <Link to={`/post/${$id}`}>
       <div className='w-full bg-gray-100 rounded-xl p-4'>
         <div className='w-full justify-center mb-4'>
           <img
-            src={appwriteService.getFilePreview(featuredImage)}
+            src={featuredImage}
             alt={title}
-            className='rounded-xl'
+            onLoad={handleImageLoad}
+            className='rounded-xl '
+            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
           />
         </div>
         <h2 className='text-xl font-bold'>{title}</h2>

@@ -9,6 +9,7 @@ const Post = () => {
   const [post, setPost] = useState(null);
   const { slug } = useParams();
   const navigate = useNavigate();
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const userData = useSelector((state) => state.auth.userData);
 
@@ -37,13 +38,19 @@ const Post = () => {
     });
   };
 
+  const handleImageLoading = () => {
+    setImageLoaded(true);
+  };
+
   return post ? (
     <div className='py-8'>
       <Container>
-        <div className='w-full flex justify-center mb-4 relative border rounded-xl p-2'>
+        <div className='w-full flex justify-center mb-4 relative border rounded-xl p-2 text-gray-800'>
           <img
             src={appwriteService.getFilePreview(post.featuredImage)}
             alt={post.title}
+            style={{ objectFit: 'cover', width: '50%', height: '50%' }}
+            onLoad={handleImageLoading}
             className='rounded-xl'
           />
           {isAuthor && (
@@ -60,9 +67,9 @@ const Post = () => {
           )}
         </div>
         <div className='w-full mb-6'>
-          <h1 className='text-2xl font-bold'>{post.title}</h1>
+          <h1 className='text-2xl font-bold text-gray-800'>{post.title}</h1>
         </div>
-        <div className='browser-css'>{parse(post.content)}</div>
+        <div >{parse(post.content)}</div>
       </Container>
     </div>
   ) : null;
